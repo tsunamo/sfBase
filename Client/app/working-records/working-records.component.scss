@@ -1,0 +1,13 @@
+@mixin test($bg-color: white) {
+    background-color: $bg-color;
+    width: 100px;
+    border: solid 1px #333;
+    text-align:center;
+}
+
+th{
+    @include test(#CCC);
+}
+td{
+    @include test();
+}
