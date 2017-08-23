@@ -25,7 +25,7 @@ namespace sfBase.Server.Entities
         /// </summary>
         [Required]
         [DataType(DataType.Date)]
-        public DateTime RecordeDate { get; set; }
+        public DateTime RecordDate { get; set; }
 
         /// <summary>
         /// 出勤時間

@@ -4,7 +4,7 @@ import { WorkingRecordWorkingType } from "../../working-records.enum";
 export class WorkingRecord implements IWorkingRecord {
     id?: number | undefined;
     userId: number;
-    recordeDate: Date;
+    recordDate: Date;
     clockIn?: Date | undefined;
     clockOut?: Date | undefined;
     workingTime?: string | undefined;
@@ -25,7 +25,7 @@ export class WorkingRecord implements IWorkingRecord {
         if (data) {
             this.id = data["id"];
             this.userId = data["userId"];
-            this.recordeDate = data["recordeDate"] ? new Date(data["recordeDate"].toString()) : <any>undefined;
+            this.recordDate = data["recordeDate"] ? new Date(data["recordeDate"].toString()) : <any>undefined;
             this.clockIn = data["clockIn"] ? new Date(data["clockIn"].toString()) : <any>undefined;
             this.clockOut = data["clockOut"] ? new Date(data["clockOut"].toString()) : <any>undefined;
             this.workingTime = data["workingTime"];
@@ -45,7 +45,7 @@ export class WorkingRecord implements IWorkingRecord {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["userId"] = this.userId;
-        data["recordeDate"] = this.recordeDate ? this.recordeDate.toISOString() : <any>undefined;
+        data["recordDate"] = this.recordDate ? this.recordDate.toISOString() : <any>undefined;
         data["clockIn"] = this.clockIn ? this.clockIn.toISOString() : <any>undefined;
         data["clockOut"] = this.clockOut ? this.clockOut.toISOString() : <any>undefined;
         data["workingTime"] = this.workingTime;

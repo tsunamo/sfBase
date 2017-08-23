@@ -8,7 +8,7 @@
         <th>退勤時刻</th>
     </tr>
     <tr *ngFor="let workingRecord of workingRecords">
-        <td>{{workingRecord.recordeDate | date:'yyyy/MM/dd'}}</td>
+        <td>{{workingRecord.recordDate | date:'yyyy/MM/dd'}}</td>
         <td>{{workingRecord.clockIn|date:'HH:mm:ss'}}</td>
         <td>{{workingRecord.clockOut|date:'HH:mm:ss'}}</td>
     </tr>

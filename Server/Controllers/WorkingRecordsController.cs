@@ -145,14 +145,14 @@ namespace sfBase.Server.Controllers
                 {
                     Id =2,
                     UserId=1,
-                    RecordeDate= DateTime.Now.Date,
+                    RecordDate= DateTime.Now.Date,
                     ClockIn=DateTime.Now
                 },
                 new WorkingRecord()
                 {
                     Id =1,
                     UserId=1,
-                    RecordeDate=DateTime.Parse("2017-07-07"),
+                    RecordDate=DateTime.Parse("2017-07-07"),
                     ClockIn=new DateTime(2017,7,7,8,50,23),
                     ClockOut=new DateTime(2017,7,7,17,45,43),
                 },
@@ -176,7 +176,7 @@ namespace sfBase.Server.Controllers
                 {
                     Id =2,
                     UserId=1,
-                    RecordeDate=DateTime.Now.Date,
+                    RecordDate=DateTime.Now.Date,
                     ClockIn=new DateTime(2017,7,8,8,27,13),
                     ClockOut=DateTime.Now
                 },
@@ -184,7 +184,7 @@ namespace sfBase.Server.Controllers
                 {
                     Id =1,
                     UserId=1,
-                    RecordeDate=DateTime.Parse("2017-07-07"),
+                    RecordDate=DateTime.Parse("2017-07-07"),
                     ClockIn=new DateTime(2017,7,7,8,50,23),
                     ClockOut=new DateTime(2017,7,7,17,45,43),
                 },

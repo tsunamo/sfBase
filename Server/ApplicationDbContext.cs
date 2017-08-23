@@ -31,7 +31,7 @@ namespace sfBase.Server
             });
 
             modelBuilder.Entity<WorkingRecord>()
-                .HasIndex(w => new { w.UserId, w.RecordeDate });
+                .HasIndex(w => new { w.UserId, w.RecordDate });
         }
     }
 }
