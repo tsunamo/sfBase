@@ -43,7 +43,7 @@ namespace sfBase.Server.Controllers
         public IEnumerable<WorkingRecord> GetWorkingRecord()
         {
             
-            RecurringJob.AddOrUpdate("slack-test", () => Test(), Cron.Minutely);
+            //RecurringJob.AddOrUpdate("slack-test", () => Test(), Cron.Minutely);
 
             return _context.WorkingRecord;
         }
@@ -157,11 +157,13 @@ namespace sfBase.Server.Controllers
                 {
                     Id =1,
                     UserId=1,
-                    RecordDate=DateTime.Parse("2017-07-07"),
-                    ClockIn=new DateTime(2017,7,7,8,50,23),
-                    ClockOut=new DateTime(2017,7,7,17,45,43),
+                    RecordDate=DateTime.Now.Date.AddDays(-1),
+                    ClockIn=DateTime.Now.AddDays(-1),
+                    ClockOut=DateTime.Now.AddDays(-1).AddHours(8),
                 },
             };
+
+
             if (workingRecords == null)
             {
                 return NotFound();
@@ -182,16 +184,16 @@ namespace sfBase.Server.Controllers
                     Id =2,
                     UserId=1,
                     RecordDate=DateTime.Now.Date,
-                    ClockIn=new DateTime(2017,7,8,8,27,13),
+                    ClockIn=DateTime.Now.AddHours(-8).AddMinutes(8).AddSeconds(-7),
                     ClockOut=DateTime.Now
                 },
                 new WorkingRecord()
                 {
                     Id =1,
                     UserId=1,
-                    RecordDate=DateTime.Parse("2017-07-07"),
-                    ClockIn=new DateTime(2017,7,7,8,50,23),
-                    ClockOut=new DateTime(2017,7,7,17,45,43),
+                    RecordDate=DateTime.Now.Date.AddDays(-1),
+                    ClockIn=DateTime.Now.AddDays(-1).AddHours(-8).AddMinutes(-15).AddSeconds(-2),
+                    ClockOut=DateTime.Now.AddDays(-1).AddMinutes(-12).AddSeconds(23),
                 },
             };
             if (workingRecords == null)

@@ -123,8 +123,8 @@ namespace sfBase
 
             app.UseOAuthProviders();
 
-            app.UseHangfireServer();
-            app.UseHangfireDashboard();
+            //app.UseHangfireServer();
+            //app.UseHangfireDashboard();
 
 
             app.UseMvc(routes =>

@@ -17,6 +17,7 @@ describe('WorkingRecordsComponent', () => {
     fixture = TestBed.createComponent(WorkingRecordsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    
   });
 
   it('should be created', () => {
