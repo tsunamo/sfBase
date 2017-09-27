@@ -11,6 +11,8 @@ using sfBase.Server.Entities;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
+using Serilog;
+using Hangfire;
 
 namespace sfBase.Server.Controllers
 {
@@ -25,20 +27,23 @@ namespace sfBase.Server.Controllers
             _context = context;
         }
 
+        public void Test()
+        {
+            using (var client = new HttpClient())
+            {
+                var json = JsonConvert.SerializeObject(new { text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"), icon_emoji = ":ghost:", username = "test" });
+
+                var contentPost = new StringContent(json, Encoding.UTF8, "application/json");
+                var res = client.PostAsync("https://hooks.slack.com/services/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", contentPost).Result;
+            }
+        }
+
         // GET: api/WorkingRecords
         [HttpGet]
         public IEnumerable<WorkingRecord> GetWorkingRecord()
         {
-
-            using (var client = new HttpClient())
-            {
-                var json = JsonConvert.SerializeObject(new { text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"),icon_emoji= ":ghost:", username = "test" });
-
-                var contentPost = new StringContent(json, Encoding.UTF8, "application/json");
-                var res =  client.PostAsync("https://hooks.slack.com/services/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",contentPost).Result;
-            }
             
-
+            RecurringJob.AddOrUpdate("slack-test", () => Test(), Cron.Minutely);
 
             return _context.WorkingRecord;
         }

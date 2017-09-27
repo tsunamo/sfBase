@@ -1,10 +1,18 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Hangfire.SQLite;
+using Hangfire.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using sfBase.Server;
 using sfBase.Server.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
+using Serilog;
+using System;
+using Hangfire;
+using System.Net.Http;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace sfBase
 {
@@ -73,10 +81,13 @@ namespace sfBase
             {
                 c.SwaggerDoc("v1", new Info { Title = "sfBase", Version = "v1" });
             });
+            services.AddHangfire(conf => conf.UseSQLiteStorage("Data Source=sfBase.db;"));
         }
+     
         public void Configure(IApplicationBuilder app)
         {
             app.AddDevMiddlewares();
+
 
             if (_hostingEnv.IsProduction())
             {
@@ -112,6 +123,10 @@ namespace sfBase
 
             app.UseOAuthProviders();
 
+            app.UseHangfireServer();
+            app.UseHangfireDashboard();
+
+
             app.UseMvc(routes =>
             {
                 // http://stackoverflow.com/questions/25982095/using-googleoauth2authenticationoptions-got-a-redirect-uri-mismatch-error
@@ -121,6 +136,21 @@ namespace sfBase
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+
         }
+
+        public void Test()
+        {
+            using (var client = new HttpClient())
+            {
+                var json = JsonConvert.SerializeObject(new { text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"), icon_emoji = ":ghost:", username = "test" });
+
+                var contentPost = new StringContent(json, Encoding.UTF8, "application/json");
+                client.PostAsync("https://hooks.slack.com/services/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", contentPost);
+            }
+        }
+
     }
+    
 }
